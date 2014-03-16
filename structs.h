@@ -1,14 +1,17 @@
-//
-//  structs.h
-//  Program_3
-//
-//  Created by artie37 on 3/14/14.
-//  Copyright (c) 2014 artie37. All rights reserved.
-//
+// Arthur Knapp
+// AK146316
+// structs.h
 
-#ifndef Program_3_structs_h
-#define Program_3_structs_h
+typedef struct RelationsTable
+{
+    char name[NAME_SIZE];
+    int offset;
+    int numAttr;
+} RelationsTable;
 
-
-
-#endif
+typedef struct AttributesTable
+{
+    char name[NAME_SIZE];
+    char type;
+    int size;
+} AttributesTable;
