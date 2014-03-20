@@ -16,8 +16,6 @@ int main(int argc, const char * argv[])
     FILE *queryFile;
     // Define file pointers for the config file and query file
     FILE *schemaFile;
-    FILE *dataFile;
-    // Define file pointers for the schema file and data file
     int i;
     // Counter for relations for loop
     int j = 0;
@@ -26,9 +24,7 @@ int main(int argc, const char * argv[])
     // Temp offset variable to compute location of each relation in attributes table
     char relName[NAME_SIZE];
     // Character array to store relation name
-    char datName[19];
-    // Character array to store relation.dat file name
-    char schName[19];
+    char schName[SCHEMA_SIZE];
     // Character array to store relation.sch file name
     char command[COMMAND_SIZE];
     // Character array to store a command from the query file
@@ -41,6 +37,8 @@ int main(int argc, const char * argv[])
     char arg4[ARG_SIZE];
     // Character array for forth argument from the query file
     int fscanfNum = 1;
+    int countFlag;
+    // Flag to specify if tuplen should return the tuplen or print it
     
     
     if (argc != ARGS)
@@ -75,12 +73,6 @@ int main(int argc, const char * argv[])
         fscanf(configFile, "%s", relTable[i].name);
         // Read relation name into relName
         
-        strcpy(datName, relTable[i].name);
-        strcat(datName, ".dat");
-        // Insert the relation name into data name, then append
-        // '.dat' at the end for the name of the data file.
-        // This will be used to open the data file for the proper relation.
-        
         strcpy(schName, relTable[i].name);
         strcat(schName, ".sch");
         // Insert the relation name into schema name, then append
@@ -93,13 +85,6 @@ int main(int argc, const char * argv[])
             fprintf(stderr, "Error: Could Not Open Schema File\n");
             exit(1);
         }
-        
-//        if ((dataFile = fopen(datName, "r")) == NULL)
-//        // If the data file doesn't open, close progam
-//        {
-//            fprintf(stderr, "Error: Could Not Open Data File\n");
-//            exit(1);
-//        }
         
         fscanf(schemaFile, "%d", &relTable[i].numAttr);
         // Read the number of attributes from the schema file
@@ -133,8 +118,9 @@ int main(int argc, const char * argv[])
         if (strcmp(command, "tuplen") == 0)
         // Checks to see if the command is "tuplen"
         {
+            countFlag = 0;
             fscanf(queryFile, "%s", arg1);
-            tupleLength(arg1);
+            tupleLength(arg1, countFlag);
         }
         
         if (strcmp(command, "infattr") == 0)
@@ -148,7 +134,9 @@ int main(int argc, const char * argv[])
         if (strcmp(command, "count") == 0)
         // Checks to see if the command is "count"
         {
-            
+            countFlag = 1;
+            fscanf(queryFile, "%s", arg1);
+            numberOfTuples(arg1, countFlag);
         }
         
         if (strcmp(command, "project") == 0)
