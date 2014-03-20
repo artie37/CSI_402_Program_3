@@ -17,3 +17,9 @@
 // Used to define the size of the querry argument arrays
 #define COMMAND_SIZE 8
 // Used to define the size of the querry command array
+#define DATA_SIZE 19
+// Used to define the size of the character array that stores
+// the data file name
+#define SCHEMA_SIZE 19
+// Used to define the size of the character array that stores
+// the schema file name
