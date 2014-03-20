@@ -3,5 +3,6 @@
 // AK146316
 
 void numberOfAttributes(char *);
-void tupleLength(char *);
+int tupleLength(char *, int);
 void attributeInfo(char *, char *);
+void numberOfTuples(char *, int);
