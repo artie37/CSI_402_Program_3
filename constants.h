@@ -13,3 +13,7 @@
 // the relation and attribute name.
 #define STRUCT_SIZE 100
 // Used to define the size of both struct arrays
+#define ARG_SIZE 30
+// Used to define the size of the querry argument arrays
+#define COMMAND_SIZE 8
+// Used to define the size of the querry command array
