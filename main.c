@@ -22,7 +22,7 @@ int main(int argc, const char * argv[])
     // Counter for attributes for loop
     int tempOffset = 0;
     // Temp offset variable to compute location of each relation in attributes table
-    char relName[NAME_SIZE];
+    char relName[16];
     // Character array to store relation name
     char schName[SCHEMA_SIZE];
     // Character array to store relation.sch file name
@@ -142,7 +142,9 @@ int main(int argc, const char * argv[])
         if (strcmp(command, "project") == 0)
         // Checks to see if the command is "project"
         {
-            
+            fscanf(queryFile, "%s ", arg1);
+            fscanf(queryFile, "%s", arg2);
+            project(arg1, arg2);
         }
         
         if (strcmp(command, "select") == 0)
@@ -186,6 +188,12 @@ int main(int argc, const char * argv[])
 //        printf("-----------------------------------------------------------\n\n\n"); fflush(stdout);
 //        i++;
 //    }
+    
+    fclose(configFile);
+    // Close config file
+    fclose(queryFile);
+    // Close queryFile);
+    
     return 0;
 }
 
