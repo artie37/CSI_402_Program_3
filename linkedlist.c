@@ -2,6 +2,32 @@
 // Arthur Knapp
 // AK146316
 
+// Functions:
+
+// linkedListString:
+// A function that inserts strings into a linked list. If the string being entered is the first string being entered,
+// the function createNewListString is called. Before insertion, the string being entered is commpared to each string
+// in the list to see if the current string is a duplicate. If it is a duplicate, the string is not entered.
+
+// linkedListInt:
+// Exactly the same as LinkedListString except it handles an int instead of a string.
+
+// createNewListString:
+// Creates a new list list by allocating memory to a new node. After the node is created, make the node
+// point to null. This signifies that it is the last node in the list. After that, insert the string into
+// the new node the have the new node, head, and tail point to each other.
+
+// createNewListInt:
+// Exactly the same as createNewListString excepti it handles an int instead of a string.
+
+// printListString:
+// Have the head node point to the temperary node pointer pCurr. Loop through the list with pCurr until
+// pCurr == NULL, meaning the end of the linked list is reached. Print the string with each iteration of
+// the loop.
+
+// printListInt:
+// Exactly the same as printListString except it handles an int instead of a string.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +39,7 @@
 Node *pHead = NULL;
 Node *pTail = NULL;
 
-void LinkedListString(char *attrName)
+void linkedListString(char *attrName)
 {
     if (pHead == NULL)
     // Checks to see if the head node is pointing to null and calls 'createNewList'.
@@ -86,7 +112,7 @@ void LinkedListString(char *attrName)
     }
 }
 
-void LinkedListInt(int attrNum)
+void linkedListInt(int attrNum)
 {
     Node *pNewNode = malloc(sizeof(Node));
     // Creates new node to be inserted into the list
@@ -217,6 +243,8 @@ void printListString()
         
         pHead = NULL;
     }
+    
+    free(pCurr);
 }
 
 void printListInt()
@@ -245,6 +273,6 @@ void printListInt()
         
         pHead = NULL;
     }
+    
+    free(pCurr);
 }
-
-
