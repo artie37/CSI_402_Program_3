@@ -22,8 +22,6 @@ int main(int argc, const char * argv[])
     // Counter for attributes for loop
     int tempOffset = 0;
     // Temp offset variable to compute location of each relation in attributes table
-    char relName[16];
-    // Character array to store relation name
     char schName[SCHEMA_SIZE];
     // Character array to store relation.sch file name
     char command[COMMAND_SIZE];
@@ -36,7 +34,6 @@ int main(int argc, const char * argv[])
     // Character array for third argument from the query file
     char arg4[ARG_SIZE];
     // Character array for forth argument from the query file
-    int fscanfNum = 1;
     int countFlag;
     // Flag to specify if tuplen should return the tuplen or print it
     
@@ -148,9 +145,13 @@ int main(int argc, const char * argv[])
         }
         
         if (strcmp(command, "select") == 0)
-        // Checks to see if the command is "select
+        // Checks to see if the command is "select"
         {
-            
+            fscanf(queryFile, "%s ", arg1);
+            fscanf(queryFile, "%s ", arg2);
+            fscanf(queryFile, "%s ", arg3);
+            fscanf(queryFile, "%s", arg4);
+            selectTuple(arg1, arg2, arg3, arg4);
         }
         
         if (strcmp(command, "quit") == 0)
@@ -159,35 +160,6 @@ int main(int argc, const char * argv[])
             exit(0);
         }
     }
-    
-    // Following code is for testing purposes. This code prints out both tables
-    // to test that the tables store the information properly.
-//    i = 0;
-//    j = 0;
-//    tempOffset = 0;
-//    
-//    while (i < relations)
-//    {
-//        printf("Relations Table:\n"); fflush(stdout);
-//        printf("Name: %s | ", relTable[i].name); fflush(stdout);
-//        printf("Offset: %d | ", relTable[i].offset); fflush(stdout);
-//        printf("NumAttr: %d\n", relTable[i].numAttr); fflush(stdout);
-//        
-//        printf("\n\n"); fflush(stdout);
-//        printf("Attributes Table:\n"); fflush(stdout);
-//        tempOffset = relTable[i].offset;
-//        
-//        while (j < relTable[i].numAttr + tempOffset)
-//        {
-//            printf("Name: %s | ", attrTable[j].name); fflush(stdout);
-//            printf("Type: %c | ", attrTable[j].type); fflush(stdout);
-//            printf("Size: %d\n", attrTable[j].size); fflush(stdout);
-//            j++;
-//        }
-//        
-//        printf("-----------------------------------------------------------\n\n\n"); fflush(stdout);
-//        i++;
-//    }
     
     fclose(configFile);
     // Close config file
